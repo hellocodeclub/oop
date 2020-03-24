@@ -1,5 +1,5 @@
 import unittest
-from parkinglot import ParkingLot, Level, Car
+from parkinglot.solution.parkinglot import ParkingLot, Level, Car
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
@@ -22,11 +22,10 @@ class MyTestCase(unittest.TestCase):
 
     def test_level(self):
         level = Level(rows = 1,levelNumber=0)
-        self.assertEquals(2, level.availableSpots)
+        self.assertEqual(2, level.availableSpots)
         level.park(Car('l1'))
         level.park(Car('l2'))
-        self.assertEquals(0, level.availableSpots)
-
+        self.assertEqual(0, level.availableSpots)
 def fillLevel(parkingLot):
     for spot in range(12):
         parkingLot.parkCar(Car('lic'+str(spot)))
