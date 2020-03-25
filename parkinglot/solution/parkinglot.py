@@ -34,17 +34,15 @@ class Level:
         if(self.availableSpots<=0):
             return None
         else:
-            if(len(self.parkingSlots)==0):
+            if(len(self.parkingSlots)==0): # The level is empty, all spots are free
                 return ParkingSlot(0,0,0, None)
             else:
                 lastCarParked = self.parkingSlots[-1]
 
-            if(lastCarParked.spotNumber<self.spotsPerRow):
+            if(lastCarParked.spotNumber<self.spotsPerRow): # Check if there is free space in the row
                 return ParkingSlot(lastCarParked.row,lastCarParked.spotNumber,self.levelNumber,None)
             if(lastCarParked.row<self.rows):
                 return ParkingSlot(lastCarParked.row+1,0,self.levelNumber,None)
-
-            return None
 
     def park(self, vehicle):
         freeParkingSpot = self.findAvailableSlot()
@@ -64,9 +62,7 @@ class ParkingLot:
 
     def park(self, car):
         for level in self.levels:
-            freeParkingSlot = level.findFreeParkingSlot()
-            if(freeParkingSlot):
-                level.park(car)
+            if(level.park(car)):
                 return True
             else:
                 continue
